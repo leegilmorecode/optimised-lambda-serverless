@@ -12,4 +12,4 @@ Package **35.2 MB zipped** (_lambda function file 1 kb_)
 
 ## Typescript + Webpack + Serverless Webpack 😎
 
-Package **257 kb zipped** (_lambda function file 181 kb_)
+Package **55 kb zipped** (_lambda function file 191 kb_)
