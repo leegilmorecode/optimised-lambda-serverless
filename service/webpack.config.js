@@ -4,12 +4,15 @@ const isLocal = slsw.lib.webpack.isLocal;
 
 module.exports = {
   mode: isLocal ? "development" : "production",
-  devtool: isLocal ? false : "source-map",
+  devtool: isLocal ? "source-map" : false,
   entry: slsw.lib.entries,
   target: "node",
+  stats: "summary",
   resolve: {
     extensions: [".mjs", ".ts", ".js"],
-    preferRelative: true,
+  },
+  performance: {
+    hints: false,
   },
   output: {
     libraryTarget: "commonjs2",
