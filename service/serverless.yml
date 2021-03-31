@@ -1,0 +1,37 @@
+service: country-service
+frameworkVersion: "2"
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  memorySize: 128
+  stage: dev
+  region: eu-west-1
+  apiGateway:
+    shouldStartNameWithService: true
+    minimumCompressionSize: 1024
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+plugins:
+  - serverless-webpack
+package:
+  individually: true
+functions:
+  get-data:
+    handler: src/get-data/get-data.handler
+    timeout: 10
+    events:
+      - http:
+          path: countries
+          method: get
+          request:
+            parameters:
+              querystrings:
+                country: true
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    includeModules:
+      forceExclude:
+        - aws-sdk
+    excludeFiles: src/**/*.spec.ts
