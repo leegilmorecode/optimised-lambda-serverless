@@ -4,7 +4,9 @@ const isLocal = slsw.lib.webpack.isLocal;
 
 module.exports = {
   mode: isLocal ? "development" : "production",
-  devtool: isLocal,
+  devtool: slsw.lib.webpack.isLocal
+    ? "cheap-module-eval-source-map"
+    : "source-map",
   entry: slsw.lib.entries,
   target: "node",
   resolve: {
