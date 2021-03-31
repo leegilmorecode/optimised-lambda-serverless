@@ -2,17 +2,17 @@ import axios from "axios";
 import { initlogger } from "@packages/logger";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-const METHOD = "get-data.handler";
-const logger = initlogger();
-
 // simple lambda handler which takes the 'country' query param
 // and does an http request to a country API to return the data
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  logger.info(`${METHOD} - started`);
+  const METHOD = "get-data.handler";
+  const logger = initlogger();
 
   try {
+    logger.info(`${METHOD} - started`);
+
     const params: any = event.queryStringParameters;
 
     // default to 'norway' if query params have not been specified
@@ -34,7 +34,7 @@ export const handler = async (
     logger.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
-      body: "Unknown error",
+      body: JSON.stringify(error.message),
     };
   }
 };
